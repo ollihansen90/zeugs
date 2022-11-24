@@ -37,3 +37,16 @@ class QuadraticFunction():
         
     def copy(self):
         return QuadraticFunction(self.a, self.b, self.c)
+
+def ableitung(funktion, x, h=0.001):
+    output = []
+    for i in range(len(x)):
+        onehot = onehotvector(i,len(x))
+        abl = (funktion(x+onehot*h)-funktion(x))/h
+        output.append(abl)
+    return np.array(output)
+
+def onehotvector(i, laenge):
+    one_hot = np.zeros(laenge)
+    one_hot[i] = 1
+    return one_hot
