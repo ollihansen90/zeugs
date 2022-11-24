@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class lineareFunktion():
+class LinearFunkcion():
     def __init__(self, m=1, b=-1):
         self.m = m
         self.b = b
