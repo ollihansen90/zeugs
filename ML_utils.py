@@ -79,9 +79,9 @@ class LinClass():
         return self.params@x.T
 
     def get_predictions(self, x):
-        return (self.__call__(data)>0)
+        return (self.__call__(x)>0)
 
-    def plot_classline(self,  ax):
+    def plot_classline(self, ax):
         weights = self.params[:-1]
         threshold = self.params[-1]
         assert weights.any(), "Weights must not be the zero vector."
