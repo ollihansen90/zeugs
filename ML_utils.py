@@ -67,7 +67,7 @@ def plot_stuff(data, pred, plotline=None):
     plt.scatter(data[pred==1, 0], data[pred==1, 1], marker=".", c="r")
     if plotline:
         ax = plt.gca()
-        f.plot_classline(ax)
+        plotline.plot_classline(ax)
     plt.show()
     
 class LinClass():
