@@ -19,7 +19,7 @@ class LinearFunction():
         return f"{self.m}*x{op}{np.abs(b)}"
 
     def copy(self):
-        return lineareFunktion(self.m, self.b)
+        return LinearFunction(self.m, self.b)
         
 class QuadraticFunction():
     def __init__(self, a=1, b=1, c=1):
@@ -50,3 +50,22 @@ def onehotvector(i, laenge):
     one_hot = np.zeros(laenge)
     one_hot[i] = 1
     return one_hot
+
+def get_data(n, m):
+    means = 4*np.random.randn(m,2)
+    data = np.zeros([1,2])
+    label = []
+    for i in range(m):
+        d = np.random.randn(n, 2) + means[i]
+        data = np.row_stack((data, d))
+        label.extend(n*[i])
+    return data[1:],np.array(label)
+
+def plot_stuff(data, pred, plotline=None):
+    plt.figure()
+    plt.scatter(data[pred==0, 0], data[pred==0, 1], marker=".", c="b")
+    plt.scatter(data[pred==1, 0], data[pred==1, 1], marker=".", c="r")
+    if plotline:
+        ax = plt.gca()
+        f.plot_classline(ax)
+    plt.show()
