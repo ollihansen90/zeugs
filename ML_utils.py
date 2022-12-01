@@ -69,3 +69,28 @@ def plot_stuff(data, pred, plotline=None):
         ax = plt.gca()
         f.plot_classline(ax)
     plt.show()
+    
+class LinClass():
+    def __init__(self, params=np.array([-1,1,1])):
+        self.params = params
+
+    def __call__(self, x):
+        x = np.column_stack((x, -np.ones(len(x))))
+        return self.params@x.T
+
+    def get_predictions(self, x):
+        return (self.__call__(data)>0)
+
+    def plot_classline(self,  ax):
+        weights = self.params[:-1]
+        threshold = self.params[-1]
+        assert weights.any(), "Weights must not be the zero vector."
+        x_min, x_max = ax.get_xbound()
+        y_min, y_max = ax.get_ybound()
+        if weights[1] == 0:
+            x_min = threshold / weights[0]
+            x_max = x_min
+        else:
+            y_min = (threshold - weights[0] * x_min) / weights[1]
+            y_max = (threshold - weights[0] * x_max) / weights[1]
+        plt.plot([x_min, x_max], [y_min, y_max], "g")
