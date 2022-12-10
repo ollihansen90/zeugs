@@ -51,12 +51,17 @@ def onehotvector(i, laenge):
     one_hot[i] = 1
     return one_hot
 
-def get_data(n, m):
-    means = 4*np.random.randn(m,2)
+def get_data(n, m, mus=[None], vars=[None]):
+    if not mus.any()==None:
+        means = np.array(mus)
+    else:
+        means = 4*np.random.randn(m,2)
+    if not vars:
+        vars = 2*np.random.rand(2)+0.1
     data = np.zeros([1,2])
     label = []
     for i in range(m):
-        d = np.random.randn(n, 2) + means[i]
+        d = vars[i]*np.random.randn(n, 2) + means[i]
         data = np.row_stack((data, d))
         label.extend(n*[i])
     return data[1:],np.array(label)
